@@ -1,12 +1,12 @@
 "use client";
 
 import { useDialog } from "@/hooks/use-dialog";
-import { Product } from "@/models/product";
+import { Vendor } from "@/models/vendor";
 import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { DeleteProductDialog } from "@/components/dialogs/products/delete-product-dialog";
-import { EditProductForm } from "@/components/forms/products/edit-product-form";
+import { DeleteVendorDialog } from "@/components/dialogs/vendors/delete-vendor-dialog";
+import { EditVendorForm } from "@/components/forms/vendors/edit-vendor-form";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -19,10 +19,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 type ActionsProps = {
-	product: Product;
+	vendor: Vendor;
 };
 
-export function Actions({ product }: ActionsProps) {
+export function Actions({ vendor }: ActionsProps) {
 	const router = useRouter();
 	const [openEdit, handleOpenEdit, handleCloseEdit] = useDialog();
 	const [openDelete, handleOpenDelete, handleCloseDelete] = useDialog();
@@ -45,7 +45,7 @@ export function Actions({ product }: ActionsProps) {
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
 						<DropdownMenuItem
-							onClick={() => router.push(`/products/${product.id}`, { scroll: true })}
+							onClick={() => router.push(`/vendors/${vendor.id}`, { scroll: true })}
 							className="hover:bg-card">
 							<Eye className="me-2 h-4 w-4" />
 							<span>{"View"}</span>
@@ -66,14 +66,14 @@ export function Actions({ product }: ActionsProps) {
 					</DropdownMenuGroup>
 				</DropdownMenuContent>
 			</DropdownMenu>
-			<EditProductForm
-				product={product}
+			<EditVendorForm
+				vendor={vendor}
 				open={openEdit}
 				onClose={handleCloseEdit}
 			/>
 
-			<DeleteProductDialog
-				product={product}
+			<DeleteVendorDialog
+				vendor={vendor}
 				open={openDelete}
 				onClose={handleCloseDelete}
 			/>

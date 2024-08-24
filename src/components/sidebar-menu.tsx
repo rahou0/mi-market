@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Boxes, FileText, LayoutGrid, LucideIcon, Users } from "lucide-react";
+import { Boxes, FileText, LayoutGrid, LucideIcon, Store, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -36,12 +36,18 @@ function getMenuList(pathname: string): Menu[] {
 			icon: LayoutGrid,
 			submenus: [],
 		},
-
 		{
 			href: "/products",
 			label: "Products",
 			active: pathname.includes("/products"),
 			icon: Boxes,
+			submenus: [],
+		},
+		{
+			href: "/vendors",
+			label: "Vendors",
+			active: pathname.includes("/vendors"),
+			icon: Store,
 			submenus: [],
 		},
 		{

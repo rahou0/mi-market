@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPrice(price: number | string, currency?: string): string {
-	const formatter = new Intl.NumberFormat("en-US", {
+	const formatter = new Intl.NumberFormat("fr-FR", {
 		style: "currency",
 		currency: currency ?? "DZD",
 		minimumFractionDigits: 2,

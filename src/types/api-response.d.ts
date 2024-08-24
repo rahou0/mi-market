@@ -1,7 +1,7 @@
-export interface ApiResponse<T> {
-	statusCode: number;
+export interface ApiResponse<T> extends T {
+	errorCode?: string;
 	message?: string;
-	results: T;
+	statusCode?: number;
 }
 
 export interface ApiResponsePaginated<T> {

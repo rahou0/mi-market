@@ -6,19 +6,19 @@ import DataLoader from "./components/data-loader";
 import { Filters } from "./components/filters";
 import { Header } from "./components/header";
 
-export type ProductsPageProps = {
+export type VendorsPageProps = {
 	searchParams: {
 		search?: string;
 	};
 };
-const breadCrumbItems = [{ href: "/", label: "Dashboard" }, { label: "Products" }];
+const breadCrumbItems = [{ href: "/", label: "Dashboard" }, { label: "Vendors" }];
 
-export default function ProductsPage({ searchParams }: ProductsPageProps) {
+export default function VendorsPage({ searchParams }: VendorsPageProps) {
 	return (
 		<ContentLayout
-			title="Products"
+			title="Vendors"
 			breadCrumbItems={breadCrumbItems}>
-			<Header heading="Products" />
+			<Header heading="Vendors" />
 			<Filters />
 			<DataLoader searchParams={searchParams} />
 		</ContentLayout>
