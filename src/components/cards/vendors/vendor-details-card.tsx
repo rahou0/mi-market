@@ -8,33 +8,34 @@ export default function VendorDetailsCard({ vendor }: { vendor: Vendor }) {
 	return (
 		<Card>
 			<CardContent className="pt-6">
-				<div className="grid grid-cols-6 gap-4">
-					<div className="col-start-1 col-end-5">
-						<div className="grid grid-cols-2 gap-4 gap-y-2">
-							<p className="">
+				<div className="grid grid-cols-12 gap-4">
+					<div className="col-start-1 col-end-12">
+						<div className="grid grid-cols-5 gap-4 gap-y-2">
+							<p>
 								<strong>{"Name"}</strong>
 							</p>
 							<p>
 								<strong>{"Phone"}</strong>
 							</p>
-							<p>{vendor.name}</p>
-							<p>{vendor.phone}</p>
-							<p className="mt-2">
+							<p>
 								<strong>{"Email"}</strong>
 							</p>
-							<p className="mt-2">
-								<strong>{"City"}</strong>
-							</p>
-							<p>{vendor.email}</p>
-							<p>{vendor.city}</p>
-							<p className="mt-4">
+							<p>
 								<strong>{"Address"}</strong>
 							</p>
-							<p className="col-start-1 col-end-3 text-justify">{vendor.address}</p>
+							<p>
+								<strong>{"City"}</strong>
+							</p>
+							<p>{vendor.name}</p>
+							<p>{vendor.phone}</p>
+
+							<p>{vendor.email}</p>
+							<p>{vendor.address}</p>
+							<p>{vendor.city}</p>
 						</div>
 					</div>
 
-					<div className="col-start-5 col-end-7">
+					<div className="col-start-12 col-end-13">
 						<Image
 							src={vendor.imageUrl}
 							width={0}

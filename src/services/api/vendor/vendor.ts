@@ -25,10 +25,11 @@ export const vendorApi = baseApi.injectEndpoints({
 			keepUnusedDataFor: 0,
 		}),
 		editVendor: builder.mutation<Vendor, any>({
-			query: ({ id, ...payload }) => ({
-				url: `/v1/vendors/${id}`,
+			query: (data) => ({
+				url: `/v1/vendors/${data.id}`,
 				method: "PUT",
-				body: payload,
+				body: data.payload,
+				formData: true,
 			}),
 			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor"]),
 		}),
@@ -37,6 +38,7 @@ export const vendorApi = baseApi.injectEndpoints({
 				url: "/v1/vendors",
 				method: "POST",
 				body: payload,
+				formData: true,
 			}),
 			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor"]),
 		}),

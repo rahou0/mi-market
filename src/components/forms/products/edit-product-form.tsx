@@ -1,6 +1,6 @@
 "use client";
 
-import { enumToOptions } from "@/lib/utils";
+import { enumToOptions, removeUndefinedProperties, toFormData } from "@/lib/utils";
 import { Product, ProductType } from "@/models/product";
 import { useEditProductMutation } from "@/services/api/product";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { ImageUpload } from "@/components/image-upload";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -46,9 +47,11 @@ const typeOptions = enumToOptions(ProductType);
 const formSchema = z.object({
 	name: z.string().min(3),
 	barCode: z.string(),
-	description: z.string().min(0),
+	description: z.string().optional(),
 	price: z.coerce.number().min(0),
 	type: z.nativeEnum(ProductType),
+	image: z.any().optional(),
+	imageUrl: z.string().optional(),
 });
 
 export function EditProductForm({ product, open, onClose }: EditProductForm) {
@@ -62,11 +65,16 @@ export function EditProductForm({ product, open, onClose }: EditProductForm) {
 			price: product.price,
 			barCode: product.barCode,
 			type: product.type,
+			imageUrl: product.imageUrl,
 		},
 	});
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		await editProduct({ id: product.id, ...values })
+		delete values.imageUrl;
+		const formData = new FormData();
+		toFormData(formData, removeUndefinedProperties({ ...values }));
+
+		await editProduct({ id: product.id, payload: formData })
 			.unwrap()
 			.then(() => {
 				onClose();
@@ -85,7 +93,7 @@ export function EditProductForm({ product, open, onClose }: EditProductForm) {
 
 	return (
 		<Dialog open={open}>
-			<DialogContent>
+			<DialogContent className="max-h-svh overflow-y-scroll rounded-md border">
 				<DialogHeader>
 					<DialogTitle>Update Product</DialogTitle>
 				</DialogHeader>
@@ -107,6 +115,28 @@ export function EditProductForm({ product, open, onClose }: EditProductForm) {
 										/>
 									</FormControl>
 									<FormDescription>This is your public display name.</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="image"
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>{"Image"}</FormLabel>
+									<FormControl>
+										<ImageUpload
+											onBlur={field.onBlur}
+											name={field.name}
+											onChange={(e) => {
+												if (e.target.files?.[0]) field.onChange(e.target.files[0]);
+											}}
+											oldImageUrl={form.getValues("imageUrl")}
+											accept="image/*"
+											id="image"
+										/>
+									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}

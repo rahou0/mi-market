@@ -1,5 +1,6 @@
 "use client";
 
+import { removeUndefinedProperties, toFormData } from "@/lib/utils";
 import { Vendor } from "@/models/vendor";
 import { useEditVendorMutation } from "@/services/api/vendor/vendor";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,6 +8,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { ImageUpload } from "@/components/image-upload";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -39,6 +41,8 @@ const formSchema = z.object({
 	email: z.string().email().optional(),
 	city: z.string().optional(),
 	address: z.string().optional(),
+	image: z.any().optional(),
+	imageUrl: z.string().optional(),
 });
 
 export function EditVendorForm({ vendor, open, onClose }: EditVendorFormProps) {
@@ -52,11 +56,16 @@ export function EditVendorForm({ vendor, open, onClose }: EditVendorFormProps) {
 			email: vendor.email,
 			address: vendor.address,
 			city: vendor.city,
+			imageUrl: vendor.imageUrl,
 		},
 	});
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		await editVendor({ id: vendor.id, ...values })
+		delete values.imageUrl;
+		const formData = new FormData();
+		toFormData(formData, removeUndefinedProperties({ ...values }));
+
+		await editVendor({ id: vendor.id, payload: formData })
 			.unwrap()
 			.then(() => {
 				onClose();
@@ -75,7 +84,7 @@ export function EditVendorForm({ vendor, open, onClose }: EditVendorFormProps) {
 
 	return (
 		<Dialog open={open}>
-			<DialogContent>
+			<DialogContent className="max-h-svh overflow-y-scroll rounded-md border">
 				<DialogHeader>
 					<DialogTitle>Update Vendor</DialogTitle>
 				</DialogHeader>
@@ -128,6 +137,28 @@ export function EditVendorForm({ vendor, open, onClose }: EditVendorFormProps) {
 											placeholder="Vendor Email"
 											{...field}
 											type="email"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="image"
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>{"Image"}</FormLabel>
+									<FormControl>
+										<ImageUpload
+											onBlur={field.onBlur}
+											name={field.name}
+											onChange={(e) => {
+												if (e.target.files?.[0]) field.onChange(e.target.files[0]);
+											}}
+											oldImageUrl={form.getValues("imageUrl")}
+											accept="image/*"
+											id="image"
 										/>
 									</FormControl>
 									<FormMessage />

@@ -1,11 +1,13 @@
 "use client";
 
+import { removeUndefinedProperties, toFormData } from "@/lib/utils";
 import { useAddVendorMutation } from "@/services/api/vendor/vendor";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { ImageUpload } from "@/components/image-upload";
 import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import {
@@ -26,6 +28,7 @@ const formSchema = z.object({
 	email: z.string().email().optional(),
 	city: z.string().optional(),
 	address: z.string().optional(),
+	image: z.any().optional(),
 });
 export function AddVendorForm() {
 	const [addVendor, { isLoading }] = useAddVendorMutation();
@@ -36,7 +39,9 @@ export function AddVendorForm() {
 	});
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		await addVendor({ ...values })
+		const formData = new FormData();
+		toFormData(formData, removeUndefinedProperties({ ...values }));
+		await addVendor(formData)
 			.unwrap()
 			.then(() => {
 				closeButtonRef?.current?.click();
@@ -103,6 +108,27 @@ export function AddVendorForm() {
 									placeholder="Vendor Email"
 									{...field}
 									type="email"
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="image"
+					render={({ field }) => (
+						<FormItem className="w-full">
+							<FormLabel>{"Image"}</FormLabel>
+							<FormControl>
+								<ImageUpload
+									onBlur={field.onBlur}
+									name={field.name}
+									onChange={(e) => {
+										if (e.target.files?.[0]) field.onChange(e.target.files[0]);
+									}}
+									accept="image/*"
+									id="image"
 								/>
 							</FormControl>
 							<FormMessage />

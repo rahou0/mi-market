@@ -25,10 +25,11 @@ export const productApi = baseApi.injectEndpoints({
 			keepUnusedDataFor: 0,
 		}),
 		editProduct: builder.mutation<Product, any>({
-			query: ({ id, ...payload }) => ({
-				url: `/v1/products/${id}`,
+			query: (data) => ({
+				url: `/v1/products/${data.id}`,
 				method: "PUT",
-				body: payload,
+				body: data.payload,
+				formData: true,
 			}),
 			invalidatesTags: (_, error) => (error ? [] : ["products", "product"]),
 		}),
@@ -37,6 +38,7 @@ export const productApi = baseApi.injectEndpoints({
 				url: "/v1/products",
 				method: "POST",
 				body: payload,
+				formData: true,
 			}),
 			invalidatesTags: (_, error) => (error ? [] : ["products", "product"]),
 		}),

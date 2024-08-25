@@ -4,7 +4,7 @@ await import("./src/env.mjs");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["curie.pnnl.gov"], // Add other domains as needed
+		domains: ["mi-market-dev.23378f3a053665b54e78d946aefeb082.r2.cloudflarestorage.com"],
 	},
 };
 

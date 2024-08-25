@@ -1,6 +1,6 @@
 "use client";
 
-import { enumToOptions } from "@/lib/utils";
+import { enumToOptions, removeUndefinedProperties, toFormData } from "@/lib/utils";
 import { ProductType } from "@/models/product";
 import { useAddProductMutation } from "@/services/api/product";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { ImageUpload } from "@/components/image-upload";
 import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import {
@@ -35,9 +36,10 @@ const typeOptions = enumToOptions(ProductType);
 const formSchema = z.object({
 	name: z.string().min(3),
 	barCode: z.string(),
-	description: z.string().min(0),
+	description: z.string().optional(),
 	price: z.coerce.number().min(0),
 	type: z.nativeEnum(ProductType),
+	image: z.any().optional(),
 });
 export function AddProductForm() {
 	const [addProduct, { isLoading }] = useAddProductMutation();
@@ -51,13 +53,15 @@ export function AddProductForm() {
 	});
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		await addProduct({ ...values })
+		const formData = new FormData();
+		toFormData(formData, removeUndefinedProperties({ ...values }));
+		await addProduct(formData)
 			.unwrap()
 			.then(() => {
-				closeButtonRef?.current?.click();
 				toast({
 					title: "Product added successfully",
 				});
+				closeButtonRef?.current?.click();
 			})
 			.catch(() => {
 				return toast({
@@ -86,6 +90,27 @@ export function AddProductForm() {
 								/>
 							</FormControl>
 							<FormDescription>This is your public display name.</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="image"
+					render={({ field }) => (
+						<FormItem className="w-full">
+							<FormLabel>{"Image"}</FormLabel>
+							<FormControl>
+								<ImageUpload
+									onBlur={field.onBlur}
+									name={field.name}
+									onChange={(e) => {
+										if (e.target.files?.[0]) field.onChange(e.target.files[0]);
+									}}
+									accept="image/*"
+									id="image"
+								/>
+							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}

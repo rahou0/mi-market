@@ -2,10 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
+import logo from "../../../public/images/logo.png";
+import logo_collapsed from "../../../public/images/logo_collapsed.png";
 import { Menu } from "../sidebar-menu";
 import { useSidebarToggle } from "../sidebar-provider";
 
@@ -58,7 +61,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 						<Link
 							href="/"
 							className="flex items-center gap-2">
-							{isOpen ? "MI Market" : "MIM"}
+							<Image
+								src={isOpen ? logo : logo_collapsed}
+								width={isOpen ? 200 : 50}
+								height={isOpen ? 50 : 20}
+								alt="mi-market"
+							/>
 						</Link>
 					</Button>
 					<Menu isOpen={isOpen} />

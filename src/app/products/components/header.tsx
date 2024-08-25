@@ -35,7 +35,7 @@ export function Header({ heading, count }: HeaderProps) {
 						{"Add Product"}
 					</Button>
 				</DialogTrigger>
-				<DialogContent className="overflow-y-scroll rounded-md border">
+				<DialogContent className="max-h-svh overflow-y-scroll rounded-md border">
 					<DialogHeader>
 						<DialogTitle>{"Add New Product"}</DialogTitle>
 						<DialogDescription></DialogDescription>

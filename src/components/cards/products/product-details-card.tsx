@@ -9,23 +9,24 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
 	return (
 		<Card>
 			<CardContent className="pt-6">
-				<div className="grid grid-cols-6 gap-4">
-					<div className="col-start-1 col-end-5">
-						<div className="grid grid-cols-2 gap-4 gap-y-2">
-							<p className="">
+				<div className="grid grid-cols-12 gap-4">
+					<div className="col-start-1 col-end-11">
+						<div className="grid grid-cols-4 gap-4 gap-y-2">
+							<p>
 								<strong>{"Name"}</strong>
 							</p>
 							<p>
 								<strong>{"Bar Code"}</strong>
 							</p>
-							<p>{product.name}</p>
-							<p>{product.barCode}</p>
-							<p className="mt-2">
+							<p>
 								<strong>{"Quantity"}</strong>
 							</p>
-							<p className="mt-2">
+							<p>
 								<strong>{"Price"}</strong>
 							</p>
+							<p>{product.name}</p>
+							<p>{product.barCode}</p>
+
 							<p>
 								{product.quantity} {capitalizeString(product.type)}
 							</p>
@@ -33,11 +34,11 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
 							<p className="mt-4">
 								<strong>{"Description"}</strong>
 							</p>
-							<p className="col-start-1 col-end-3 text-justify">{product.description}</p>
+							<p className="col-start-1 col-end-5 text-justify">{product.description}</p>
 						</div>
 					</div>
 
-					<div className="col-start-5 col-end-7">
+					<div className="col-start-11 col-end-13">
 						<Image
 							src={product.imageUrl}
 							width={0}
