@@ -1,7 +1,8 @@
 export enum ProductType {
-	BOX = "box",
-	BAG = "bag",
-	ITEM = "item",
+	BOX = "boxes",
+	BAG = "bags",
+	ITEM = "items",
+	FARDEAU = "Fardeau",
 }
 
 export type Product = {

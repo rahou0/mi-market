@@ -19,6 +19,11 @@ export const productApi = baseApi.injectEndpoints({
 			providesTags: ["products"],
 			keepUnusedDataFor: 0,
 		}),
+		fetchProductsSlim: builder.query<Product[], any>({
+			query: ({ search }) => `/v1/products/slim?search=${search}`,
+			providesTags: ["products-slim"],
+			keepUnusedDataFor: 0,
+		}),
 		fetchProductDetails: builder.query<Product, any>({
 			query: (id) => `/v1/products/${id}`,
 			providesTags: ["product"],
@@ -31,7 +36,7 @@ export const productApi = baseApi.injectEndpoints({
 				body: data.payload,
 				formData: true,
 			}),
-			invalidatesTags: (_, error) => (error ? [] : ["products", "product"]),
+			invalidatesTags: (_, error) => (error ? [] : ["products", "product", "products-slim"]),
 		}),
 		addProduct: builder.mutation<Product, any>({
 			query: (payload) => ({
@@ -40,14 +45,14 @@ export const productApi = baseApi.injectEndpoints({
 				body: payload,
 				formData: true,
 			}),
-			invalidatesTags: (_, error) => (error ? [] : ["products", "product"]),
+			invalidatesTags: (_, error) => (error ? [] : ["products", "product", "products-slim"]),
 		}),
 		deleteProduct: builder.mutation<Product, any>({
 			query: (id) => ({
 				url: `/v1/products/${id}`,
 				method: "DELETE",
 			}),
-			invalidatesTags: (_, error) => (error ? [] : ["products", "product"]),
+			invalidatesTags: (_, error) => (error ? [] : ["products", "product", "products-slim"]),
 		}),
 	}),
 });
@@ -57,4 +62,5 @@ export const {
 	useDeleteProductMutation,
 	useEditProductMutation,
 	useFetchProductDetailsQuery,
+	useFetchProductsSlimQuery,
 } = productApi;

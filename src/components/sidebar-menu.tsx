@@ -58,6 +58,13 @@ function getMenuList(pathname: string): Menu[] {
 			submenus: [],
 		},
 		{
+			href: "/purchases",
+			label: "Purchases",
+			active: pathname.includes("/purchases"),
+			icon: FileText,
+			submenus: [],
+		},
+		{
 			href: "/invoices",
 			label: "Invoices",
 			active: pathname.includes("/invoices"),

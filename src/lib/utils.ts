@@ -1,5 +1,6 @@
 import { Option } from "@/types";
 import { type ClassValue, clsx } from "clsx";
+import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -77,3 +78,8 @@ export const getFileBase64 = (file: File, callback: (result: string | null) => v
 	reader.addEventListener("load", () => callback(reader.result as string));
 	reader.readAsDataURL(file);
 };
+
+export function formatDate(date: string | Date | null | undefined, withTime = true): string {
+	const format = withTime ? "DD MMMM YYYY h:mm a" : "DD MMMM YYYY";
+	return date ? dayjs(date).format(format) : "--";
+}

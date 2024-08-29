@@ -19,6 +19,10 @@ export const vendorApi = baseApi.injectEndpoints({
 			providesTags: ["vendors"],
 			keepUnusedDataFor: 0,
 		}),
+		fetchVendorsSlim: builder.query<Vendor[], any>({
+			query: () => "/v1/vendors/slim",
+			providesTags: ["vendors-slim"],
+		}),
 		fetchVendorDetails: builder.query<Vendor, any>({
 			query: (id) => `/v1/vendors/${id}`,
 			providesTags: ["vendor"],
@@ -31,7 +35,7 @@ export const vendorApi = baseApi.injectEndpoints({
 				body: data.payload,
 				formData: true,
 			}),
-			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor"]),
+			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor", "vendors-slim"]),
 		}),
 		addVendor: builder.mutation<Vendor, any>({
 			query: (payload) => ({
@@ -40,14 +44,14 @@ export const vendorApi = baseApi.injectEndpoints({
 				body: payload,
 				formData: true,
 			}),
-			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor"]),
+			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor", "vendors-slim"]),
 		}),
 		deleteVendor: builder.mutation<Vendor, any>({
 			query: (id) => ({
 				url: `/v1/vendors/${id}`,
 				method: "DELETE",
 			}),
-			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor"]),
+			invalidatesTags: (_, error) => (error ? [] : ["vendors", "vendor", "vendors-slim"]),
 		}),
 	}),
 });
@@ -57,4 +61,5 @@ export const {
 	useFetchVendorDetailsQuery,
 	useEditVendorMutation,
 	useFetchVendorsListQuery,
+	useFetchVendorsSlimQuery,
 } = vendorApi;
