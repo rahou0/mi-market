@@ -27,7 +27,7 @@ export function ThemeProvider({
 	defaultTheme = "dark",
 	storageKey = "driver-challenge-ui-theme",
 	...props
-}: ThemeProviderProps) {
+}: Readonly<ThemeProviderProps>) {
 	const [theme, setTheme] = useState<Theme>(defaultTheme);
 
 	useEffect(() => {

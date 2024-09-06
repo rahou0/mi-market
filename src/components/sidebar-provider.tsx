@@ -21,7 +21,7 @@ export const SideBarProviderContext = createContext<SideBarProviderState | undef
 
 const storageKey = "sidebarOpen";
 
-export function SideBarProvider({ children }: SideBarProviderProps) {
+export function SideBarProvider({ children }: Readonly<SideBarProviderProps>) {
 	const [isOpen, setIsOpen] = useState(true);
 
 	useEffect(() => {

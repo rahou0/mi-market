@@ -35,25 +35,24 @@ interface ToFormDataArgs {
 
 export function toFormData<T extends ToFormDataArgs>(formData: FormData, data: T, parentKey = "") {
 	for (const key in data) {
-		if (data.hasOwnProperty(key)) {
-			const value = data[key] as any;
-			const formKey = parentKey ? `${parentKey}[${key}]` : key;
-			if (value.from && value.to) {
-				formData.append(formKey, value.from);
-				formData.append(formKey, value.to);
-			} else if (value instanceof Date) {
-				formData.append(formKey, value.toString());
-			} else if (value instanceof File) {
-				formData.append(formKey, value);
-			} else if (Array.isArray(value) && value.every((v) => typeof v === "object")) {
-				value.forEach((item, index) => {
-					toFormData(formData, item, `${formKey}[${index}]`);
-				});
-			} else if (typeof value === "object" && value !== null) {
-				toFormData(formData, value, formKey);
-			} else {
-				formData.append(formKey, value);
-			}
+		if (!data.hasOwnProperty(key)) continue;
+		const value = data[key] as any;
+		const formKey = parentKey ? `${parentKey}[${key}]` : key;
+		if (value.from && value.to) {
+			formData.append(formKey, value.from);
+			formData.append(formKey, value.to);
+		} else if (value instanceof Date) {
+			formData.append(formKey, value.toString());
+		} else if (value instanceof File) {
+			formData.append(formKey, value);
+		} else if (Array.isArray(value) && value.every((v) => typeof v === "object")) {
+			value.forEach((item, index) => {
+				toFormData(formData, item, `${formKey}[${index}]`);
+			});
+		} else if (typeof value === "object" && value !== null) {
+			toFormData(formData, value, formKey);
+		} else {
+			formData.append(formKey, value);
 		}
 	}
 }

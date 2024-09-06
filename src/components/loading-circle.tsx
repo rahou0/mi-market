@@ -2,9 +2,7 @@ import React from "react";
 
 function LoadingCircle() {
 	return (
-		<div
-			role="status"
-			className="flex h-96 w-full items-center justify-center">
+		<output className="flex h-96 w-full items-center justify-center">
 			<svg
 				aria-hidden="true"
 				className="h-20 w-20 animate-spin fill-primary text-gray-200"
@@ -19,7 +17,7 @@ function LoadingCircle() {
 					fill="currentFill"
 				/>
 			</svg>
-		</div>
+		</output>
 	);
 }
 

@@ -93,16 +93,14 @@ export function FileUpload({ value, oldFile, onRemove, ...props }: FileUploadPro
 								alt="file image"
 							/>
 						</div>
-						<div
+						<input
 							className="ml-2 w-full cursor-pointer space-y-1"
 							onClick={handleClick}
-							tabIndex={0}
-							onKeyDown={() => {}}
-							role="button">
+							type="button">
 							<div className="flex justify-between text-sm">
 								<p className="">{""}</p>
 							</div>
-						</div>
+						</input>
 					</div>
 					<button
 						onClick={onRemove}
@@ -115,16 +113,14 @@ export function FileUpload({ value, oldFile, onRemove, ...props }: FileUploadPro
 				<div className="group flex justify-between gap-2 overflow-hidden rounded-lg border border-input pr-2 transition-all hover:pr-0 hover:outline-none">
 					<div className="flex flex-1 items-center p-2">
 						<div className="text-white">{getFileIconAndColor(value).icon}</div>
-						<div
+						<input
 							className="ml-2 w-full cursor-pointer space-y-1"
 							onClick={handleClick}
-							tabIndex={0}
-							onKeyDown={() => {}}
-							role="button">
+							type="button">
 							<div className="flex justify-between text-sm">
 								<p className="">{value.name}</p>
 							</div>
-						</div>
+						</input>
 					</div>
 					<button
 						onClick={onRemove}

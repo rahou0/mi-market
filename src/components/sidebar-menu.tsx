@@ -74,7 +74,7 @@ function getMenuList(pathname: string): Menu[] {
 	];
 }
 
-export function Menu({ isOpen }: MenuProps) {
+export function Menu({ isOpen }: Readonly<MenuProps>) {
 	const pathname = usePathname();
 	const menuList: Menu[] = getMenuList(decodeURIComponent(pathname));
 

@@ -32,7 +32,7 @@ export const AutoCompleteSingleSelect = ({
 }: AutoCompleteSingleSelectProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const [isOpen, setOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 	const [selected, setSelected] = useState<any>(value);
 
 	const handleKeyDown = useCallback(
@@ -44,7 +44,7 @@ export const AutoCompleteSingleSelect = ({
 
 			// Keep the options displayed when the user is typing
 			if (!isOpen) {
-				setOpen(true);
+				setIsOpen(true);
 			}
 
 			// This is not a default behaviour of the <input /> field
@@ -64,9 +64,9 @@ export const AutoCompleteSingleSelect = ({
 	);
 
 	const handleBlur = useCallback(() => {
-		setOpen(false);
+		setIsOpen(false);
 		setInputValue(selected?.name);
-	}, [selected]);
+	}, [selected?.name, setInputValue]);
 
 	const handleSelectOption = useCallback(
 		(selectedOption: Option) => {
@@ -81,7 +81,7 @@ export const AutoCompleteSingleSelect = ({
 				inputRef?.current?.blur();
 			}, 0);
 		},
-		[onValueChange]
+		[onValueChange, setInputValue]
 	);
 
 	return (
@@ -92,7 +92,7 @@ export const AutoCompleteSingleSelect = ({
 					value={inputValue}
 					onValueChange={isLoading ? undefined : setInputValue}
 					onBlur={handleBlur}
-					onFocus={() => setOpen(true)}
+					onFocus={() => setIsOpen(true)}
 					placeholder={placeholder}
 					disabled={disabled}
 					className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
