@@ -5,9 +5,15 @@ import { Purchase, PurchaseStatus } from "@/models/purchase";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
-import { Badge } from "@/components/ui/badge";
+import { Badge, BadgeVariantProps } from "@/components/ui/badge";
 
 import { Actions } from "./actions";
+
+const statusVariantMap: Record<PurchaseStatus, BadgeVariantProps> = {
+	[PurchaseStatus.PAID]: "success",
+	[PurchaseStatus.NOT_PAID]: "destructive",
+	[PurchaseStatus.PARTIALLY_PAID]: "warning",
+};
 
 export const columns: ColumnDef<Purchase>[] = [
 	{
@@ -37,13 +43,8 @@ export const columns: ColumnDef<Purchase>[] = [
 		accessorKey: "status",
 		header: "Status",
 		cell: ({ row }) => {
-			const status = row?.original?.status;
-			const variant =
-				status === PurchaseStatus.PAID
-					? "success"
-					: status === PurchaseStatus.NOT_PAID
-						? "destructive"
-						: "warning";
+			const status: PurchaseStatus = row?.original?.status;
+			const variant = statusVariantMap[status];
 			return <Badge variant={variant}>{capitalizeString(status)}</Badge>;
 		},
 	},

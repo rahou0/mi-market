@@ -1,5 +1,6 @@
 "use client";
 
+import { generateUniqueKey } from "@/lib/utils";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
 import {
@@ -54,7 +55,7 @@ export function DataTable<TData, TValue>({
 					{isLoading ? (
 						<>
 							{Array.from({ length: 20 }).map((_, index) => (
-								<TableRow key={`row-${index}`}>
+								<TableRow key={generateUniqueKey()}>
 									{Array.from({ length: columns.length }).map((_, subIndex) => (
 										<TableCell
 											key={`row-${index}-cell-${subIndex}`}

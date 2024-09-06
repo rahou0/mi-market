@@ -83,3 +83,7 @@ export function formatDate(date: string | Date | null | undefined, withTime = tr
 	const format = withTime ? "DD MMMM YYYY h:mm a" : "DD MMMM YYYY";
 	return date ? dayjs(date).format(format) : "--";
 }
+
+export function generateUniqueKey(): string {
+	return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+}
