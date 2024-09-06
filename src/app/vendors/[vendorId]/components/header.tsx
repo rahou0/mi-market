@@ -3,6 +3,8 @@
 import { useFetchVendorDetailsQuery } from "@/services/api/vendor/vendor";
 import { useParams } from "next/navigation";
 
+import TablePageHeader from "@/components/shared/table-page-header";
+
 import { Actions } from "./actions";
 
 type HeaderProps = {
@@ -16,13 +18,10 @@ export function Header({ heading, count }: Readonly<HeaderProps>) {
 	const { data } = useFetchVendorDetailsQuery(vendorId);
 
 	return (
-		<div className="mx-auto mt-2 flex w-full items-center justify-between gap-2">
-			{heading && (
-				<h1 className="align-middle text-3xl font-semibold leading-none tracking-tight">
-					{heading} {count && `(${count})`}
-				</h1>
-			)}
+		<TablePageHeader
+			heading={heading}
+			count={count}>
 			{data && <Actions vendor={data} />}
-		</div>
+		</TablePageHeader>
 	);
 }

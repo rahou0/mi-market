@@ -3,6 +3,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+import TablePageHeader from "@/components/shared/table-page-header";
 import { Button } from "@/components/ui/button";
 
 type HeaderProps = {
@@ -15,7 +16,7 @@ export function Header({ heading }: Readonly<HeaderProps>) {
 	};
 
 	return (
-		<div className="mx-auto mb-4 mt-2 flex w-full items-center justify-between gap-2">
+		<TablePageHeader heading={heading}>
 			<div className="flex gap-4">
 				<Button
 					onClick={goBack}
@@ -30,6 +31,6 @@ export function Header({ heading }: Readonly<HeaderProps>) {
 					</h1>
 				)}
 			</div>
-		</div>
+		</TablePageHeader>
 	);
 }
