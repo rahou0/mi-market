@@ -19,7 +19,7 @@ type ActionsProps = {
 	purchase: Purchase;
 };
 
-export function Actions({ purchase }: ActionsProps) {
+export function Actions({ purchase }: Readonly<ActionsProps>) {
 	const router = useRouter();
 
 	return (

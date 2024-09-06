@@ -11,7 +11,7 @@ import { columns } from "./columns";
 
 type DataLoaderProps = VendorsPageProps;
 
-export default function DataLoader({ searchParams }: DataLoaderProps) {
+export default function DataLoader({ searchParams }: Readonly<DataLoaderProps>) {
 	const { data, isLoading, isFetching } = useFetchVendorsListQuery(searchParams);
 	return (
 		<Card>

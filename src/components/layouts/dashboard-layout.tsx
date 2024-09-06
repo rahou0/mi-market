@@ -17,7 +17,7 @@ interface SidebarToggleProps {
 	setIsOpen: (isOpen: boolean) => void;
 }
 
-export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
+export function SidebarToggle({ isOpen, setIsOpen }: Readonly<SidebarToggleProps>) {
 	return (
 		<div className="invisible absolute -end-[16px] top-[12px] z-20 lg:visible">
 			<Button
@@ -35,7 +35,7 @@ export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
 		</div>
 	);
 }
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	const { isOpen, setIsOpen } = useSidebarToggle();
 
 	return (

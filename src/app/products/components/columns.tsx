@@ -54,15 +54,6 @@ export const columns: ColumnDef<Product>[] = [
 			return `x${quantity} ${capitalizeString(type)}`;
 		},
 	},
-	// {
-	// 	id: "description",
-	// 	accessorKey: "description",
-	// 	header: "Description",
-	// 	cell: ({ row }) => {
-	// 		const value: string = row.getValue("description");
-	// 		return <p className="line-clamp-3 text-justify">{value}</p>;
-	// 	},
-	// },
 	{
 		id: "actions",
 		cell: ({ row }) => {

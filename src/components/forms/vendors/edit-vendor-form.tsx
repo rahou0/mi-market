@@ -45,7 +45,7 @@ const formSchema = z.object({
 	imageUrl: z.string().optional(),
 });
 
-export function EditVendorForm({ vendor, open, onClose }: EditVendorFormProps) {
+export function EditVendorForm({ vendor, open, onClose }: Readonly<EditVendorFormProps>) {
 	const [editVendor, { isLoading }] = useEditVendorMutation();
 
 	const form = useForm<z.infer<typeof formSchema>>({

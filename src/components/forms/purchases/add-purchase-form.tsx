@@ -51,8 +51,6 @@ const formSchema = z.object({
 });
 export function AddPurchaseForm() {
 	const [openAdd, handleOpenAdd, handleCloseAdd] = useDialog();
-	// const [openEdit, handleOpenEdit, handleCloseEdit] = useDialog();
-	// const [openDelete, handleOpenDelete, handleCloseDelete] = useDialog();
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {

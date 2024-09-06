@@ -46,7 +46,7 @@ export function AddProductToPurchaseForm({
 	onClose,
 	onAdd,
 	products,
-}: AddProductToPurchaseFormProps) {
+}: Readonly<AddProductToPurchaseFormProps>) {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {},

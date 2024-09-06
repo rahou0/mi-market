@@ -17,7 +17,7 @@ type HeaderProps = {
 	count?: number;
 };
 
-export function Header({ heading, count }: HeaderProps) {
+export function Header({ heading, count }: Readonly<HeaderProps>) {
 	return (
 		<div className="mx-auto flex w-full items-center justify-between gap-2">
 			{heading && (

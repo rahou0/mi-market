@@ -10,7 +10,7 @@ type HeaderProps = {
 	count?: number;
 };
 
-export function Header({ heading, count }: HeaderProps) {
+export function Header({ heading, count }: Readonly<HeaderProps>) {
 	const router = useRouter();
 
 	return (

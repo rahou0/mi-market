@@ -22,7 +22,7 @@ type ActionsProps = {
 	product: Product;
 };
 
-export function Actions({ product }: ActionsProps) {
+export function Actions({ product }: Readonly<ActionsProps>) {
 	const router = useRouter();
 	const [openEdit, handleOpenEdit, handleCloseEdit] = useDialog();
 	const [openDelete, handleOpenDelete, handleCloseDelete] = useDialog();

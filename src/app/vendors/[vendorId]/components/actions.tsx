@@ -21,7 +21,7 @@ type ActionsProps = {
 	vendor: Vendor;
 };
 
-export function Actions({ vendor }: ActionsProps) {
+export function Actions({ vendor }: Readonly<ActionsProps>) {
 	const router = useRouter();
 	const [openEdit, handleOpenEdit, handleCloseEdit] = useDialog();
 	const [openDelete, handleOpenDelete, handleCloseDelete] = useDialog();

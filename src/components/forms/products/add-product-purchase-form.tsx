@@ -52,7 +52,11 @@ const formSchema = z.object({
 	status: z.nativeEnum(PurchaseStatus),
 	paidAmount: z.coerce.number().min(0),
 });
-export function AddProductPurchaseForm({ product, open, onClose }: AddProductPurchaseFormProps) {
+export function AddProductPurchaseForm({
+	product,
+	open,
+	onClose,
+}: Readonly<AddProductPurchaseFormProps>) {
 	const [addPurchase, { isLoading }] = useAddPurchaseMutation();
 
 	const form = useForm<z.infer<typeof formSchema>>({

@@ -16,7 +16,7 @@ type SelectVendorSlimProps = {
 	field: ControllerRenderProps<any, "vendor">;
 	disabled: boolean;
 };
-function SelectVendorSlim({ field, disabled }: SelectVendorSlimProps) {
+function SelectVendorSlim({ field, disabled }: Readonly<SelectVendorSlimProps>) {
 	const { data, isLoading, isFetching } = useFetchVendorsSlimQuery({});
 
 	return (

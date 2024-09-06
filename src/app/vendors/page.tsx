@@ -13,7 +13,7 @@ export type VendorsPageProps = {
 };
 const breadCrumbItems = [{ href: "/", label: "Dashboard" }, { label: "Vendors" }];
 
-export default function VendorsPage({ searchParams }: VendorsPageProps) {
+export default function VendorsPage({ searchParams }: Readonly<VendorsPageProps>) {
 	return (
 		<ContentLayout
 			title="Vendors"

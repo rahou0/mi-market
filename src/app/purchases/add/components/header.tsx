@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 type HeaderProps = {
 	heading?: string;
 };
-export function Header({ heading }: HeaderProps) {
+export function Header({ heading }: Readonly<HeaderProps>) {
 	const router = useRouter();
 	const goBack = () => {
 		router.back();

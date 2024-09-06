@@ -13,7 +13,7 @@ export type PurchasesPageProps = {
 };
 const breadCrumbItems = [{ href: "/", label: "Dashboard" }, { label: "Purchases" }];
 
-export default function PurchasesPage({ searchParams }: PurchasesPageProps) {
+export default function PurchasesPage({ searchParams }: Readonly<PurchasesPageProps>) {
 	return (
 		<ContentLayout
 			title="Purchases"

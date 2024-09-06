@@ -11,7 +11,7 @@ import { columns } from "./columns";
 
 type DataLoaderProps = ProductsPageProps;
 
-export default function DataLoader({ searchParams }: DataLoaderProps) {
+export default function DataLoader({ searchParams }: Readonly<DataLoaderProps>) {
 	const { data, isLoading, isFetching } = useFetchProductsListQuery(searchParams);
 	return (
 		<Card>

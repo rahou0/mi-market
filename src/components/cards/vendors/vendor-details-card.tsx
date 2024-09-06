@@ -4,7 +4,7 @@ import React from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function VendorDetailsCard({ vendor }: { vendor: Vendor }) {
+export default function VendorDetailsCard({ vendor }: Readonly<{ vendor: Vendor }>) {
 	return (
 		<Card>
 			<CardContent className="pt-6">

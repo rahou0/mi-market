@@ -5,7 +5,7 @@ import React from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function ProductDetailsCard({ product }: { product: Product }) {
+export default function ProductDetailsCard({ product }: Readonly<{ product: Product }>) {
 	return (
 		<Card>
 			<CardContent className="pt-6">

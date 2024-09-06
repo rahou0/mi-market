@@ -27,7 +27,7 @@ export function DeleteProductDialog({
 	open,
 	onClose,
 	onSuccess,
-}: DeleteProductDialogProps) {
+}: Readonly<DeleteProductDialogProps>) {
 	const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
 	const onConfirm = async () => {

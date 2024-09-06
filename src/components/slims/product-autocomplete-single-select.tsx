@@ -13,7 +13,9 @@ type ProductAutoCompleteSingleSelectProps = {
 	products: Product[];
 };
 
-export function ProductAutoCompleteSingleSelect(props: ProductAutoCompleteSingleSelectProps) {
+export function ProductAutoCompleteSingleSelect(
+	props: Readonly<ProductAutoCompleteSingleSelectProps>
+) {
 	const [inputValue, setInputValue] = React.useState<string>("");
 	const { data, isLoading, isFetching } = useFetchProductsSlimQuery({ search: inputValue });
 	return (

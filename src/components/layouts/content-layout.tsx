@@ -24,7 +24,7 @@ interface ContentLayoutProps {
 	breadCrumbItems?: BreadCrumbItem[];
 }
 
-export function ContentLayout({ title, breadCrumbItems, children }: ContentLayoutProps) {
+export function ContentLayout({ title, breadCrumbItems, children }: Readonly<ContentLayoutProps>) {
 	return (
 		<div>
 			<header className="sticky top-0 z-10 w-full bg-zinc-50/40 shadow backdrop-blur dark:shadow-secondary">

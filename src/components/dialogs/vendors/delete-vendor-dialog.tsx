@@ -22,7 +22,12 @@ type DeleteVendorDialogProps = {
 	onSuccess?: () => void;
 };
 
-export function DeleteVendorDialog({ vendor, open, onClose, onSuccess }: DeleteVendorDialogProps) {
+export function DeleteVendorDialog({
+	vendor,
+	open,
+	onClose,
+	onSuccess,
+}: Readonly<DeleteVendorDialogProps>) {
 	const [deleteVendor, { isLoading }] = useDeleteVendorMutation();
 
 	const onConfirm = async () => {
