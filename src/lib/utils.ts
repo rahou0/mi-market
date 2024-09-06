@@ -84,6 +84,6 @@ export function formatDate(date: string | Date | null | undefined, withTime = tr
 	return date ? dayjs(date).format(format) : "--";
 }
 
-export function generateUniqueKey(): string {
+export function randomKeyGenerator(): string {
 	return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 }
