@@ -1,8 +1,8 @@
 import { Option } from "@/types";
 import { type ClassValue, clsx } from "clsx";
-import crypto from "crypto";
 import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
+import { v4 as uuidv4 } from "uuid";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -85,5 +85,5 @@ export function formatDate(date: string | Date | null | undefined, withTime = tr
 }
 
 export function randomKeyGenerator(): string {
-	return crypto.randomUUID();
+	return uuidv4();
 }

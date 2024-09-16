@@ -19,7 +19,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/
 import { Menu } from "../sidebar-menu";
 
 interface ContentLayoutProps {
-	title: string;
+	title?: string;
 	children: React.ReactNode;
 	breadCrumbItems?: BreadCrumbItem[];
 }
@@ -59,7 +59,7 @@ export function ContentLayout({ title, breadCrumbItems, children }: Readonly<Con
 								<Menu isOpen />
 							</SheetContent>
 						</Sheet>
-						<h1 className="font-bold">{title}</h1>
+						{title && <h1 className="font-bold">{title}</h1>}
 					</div>
 				</div>
 			</header>

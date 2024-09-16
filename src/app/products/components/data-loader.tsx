@@ -1,6 +1,6 @@
 "use client";
 
-import { useFetchProductsListQuery } from "@/services/api/product";
+import { useRead } from "@/lib/hooks";
 import React from "react";
 
 import { DataTable } from "@/components/data-table";
@@ -12,14 +12,14 @@ import { columns } from "./columns";
 type DataLoaderProps = ProductsPageProps;
 
 export default function DataLoader({ searchParams }: Readonly<DataLoaderProps>) {
-	const { data, isLoading, isFetching } = useFetchProductsListQuery(searchParams);
+	const { data, isPending } = useRead("ListProducts", searchParams);
 	return (
 		<Card>
 			<CardContent className="pt-6">
 				<DataTable
 					columns={columns}
 					data={data?.data ?? []}
-					isLoading={isLoading || isFetching}
+					isLoading={isPending}
 				/>
 			</CardContent>
 		</Card>
