@@ -27,4 +27,25 @@ export interface ListProducts {
 }
 export type ListProductsResponse = PaginatedResponse<Product>;
 
+// READ REQUESTS
 export type ReadRequest = { type: "ListProducts"; params: ListProducts };
+
+// DELETE REQUESTS
+
+// UPDATE REQUESTS
+
+// CREATE REQUESTS
+
+// READ RESPONSES
+export type ReadResponses = {
+	ListProducts: ListProductsResponse;
+};
+
+// DELETE RESPONSES
+
+// UPDATE RESPONSES
+
+// CREATE RESPONSES
+
+//URLS
+export const urls = { ListProducts: "/v1/productsss" };

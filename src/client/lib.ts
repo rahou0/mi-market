@@ -1,8 +1,6 @@
 import axios from "axios";
 
-import { ReadResponses } from "./responses";
-import { ReadRequest } from "./types";
-import { ReadRequestUrls } from "./urls";
+import { ReadRequest, ReadResponses, urls } from "./types";
 
 export * as Types from "./types";
 
@@ -35,7 +33,7 @@ export function Client(url: string, options: InitOptions) {
 	};
 
 	const read = async <Req extends ReadRequest>(req: Req) =>
-		await request<Req, ReadResponses[Req["type"]]>("GET", ReadRequestUrls[req["type"]], req);
+		await request<Req, ReadResponses[Req["type"]]>("GET", urls[req["type"]], req);
 
 	return { request, read };
 }
