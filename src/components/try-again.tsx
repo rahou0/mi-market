@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import alertImage from "../../public/images/alert.svg";
 
-export default function TryAgain({ reset }: { reset: () => void }) {
+export default function TryAgain({ reset }: Readonly<{ reset: () => void }>) {
 	return (
 		<div className="mt-10">
 			<div className="flex flex-1 items-center justify-center rounded-lg border border-dashed py-12 shadow-sm">
